@@ -2,13 +2,21 @@ package com.alibaba.controller;
 
 import com.alibaba.entity.Order;
 import com.alibaba.entity.Product;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.feign.ProductService;
 import com.alibaba.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.Random;
 
 /**
  * @author : penghong
@@ -21,11 +29,23 @@ public class OrderController {
     private RestTemplate restTemplate;
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private DiscoveryClient discoveryClient;
+    @Resource
+    private ProductService productService;
 
     @GetMapping("/order/prod/{id}")
     public Order order(@PathVariable("id") Integer id){
         log.info("查询商品信息");
-        Product product = restTemplate.getForObject("localhost:8081/product" + id, Product.class);
+        //从nacos中获取服务地址
+//        List<ServiceInstance> serviceInstances = discoveryClient.getInstances("service-product");
+//        int index = new Random().nextInt(serviceInstances.size());
+//        String url = serviceInstances.get(index).getHost() + ":" + serviceInstances.get(index).getPort();
+//        log.info("获取的url-->" + url);
+//
+//        Product product = restTemplate.getForObject("http://" + url + "/product/" + id, Product.class);
+        Product product = productService.findById(id);
+        log.info("商品信息查询结果-->" + JSON.toJSONString(product));
         Order order = new Order();
         order.setUserId(1);
         order.setUserName("测试用户");
