@@ -11,15 +11,15 @@ import org.springframework.context.annotation.Bean;
  * @author : penghong
  * @date : 2021-05-28 15:16
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages={"com.netflix.client.config.IClientConfig"})
 @EnableDiscoveryClient
 public class ProductApplication {
     public static void main(String[] args) {
         SpringApplication.run(ProductApplication.class, args);
     }
 
-    @Bean
-    public IClientConfig iClientConfig(){
-        return new DefaultClientConfigImpl();
-    }
+//    @Bean
+//    public IClientConfig iClientConfig(){
+//        return new DefaultClientConfigImpl();
+//    }
 }

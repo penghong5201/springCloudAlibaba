@@ -7,5 +7,9 @@ import com.alibaba.entity.Order;
  * @date : 2021-05-28 16:31
  */
 public interface OrderService {
-    void save(Order order);
+    /**保存
+     * @param id
+     * @return
+     */
+    Order save(Integer id);
 }

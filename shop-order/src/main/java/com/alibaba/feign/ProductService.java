@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author : penghong
  * @date : 2021-05-31 16:09
  */
-@FeignClient(value = "service-product")
-@Service
+@FeignClient("service-product")
 public interface ProductService {
 
     /**获取商品信息

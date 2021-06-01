@@ -31,8 +31,6 @@ public class OrderController {
     private OrderService orderService;
     @Autowired
     private DiscoveryClient discoveryClient;
-    @Resource
-    private ProductService productService;
 
     @GetMapping("/order/prod/{id}")
     public Order order(@PathVariable("id") Integer id){
@@ -44,16 +42,7 @@ public class OrderController {
 //        log.info("获取的url-->" + url);
 //
 //        Product product = restTemplate.getForObject("http://" + url + "/product/" + id, Product.class);
-        Product product = productService.findById(id);
-        log.info("商品信息查询结果-->" + JSON.toJSONString(product));
-        Order order = new Order();
-        order.setUserId(1);
-        order.setUserName("测试用户");
-        order.setProductId(product.getId());
-        order.setProductName(product.getPName());
-        order.setNumber(1);
-        order.setPrice(product.getPPrice());
-        orderService.save(order);
-        return order;
+
+        return orderService.save(id);
     }
 }
