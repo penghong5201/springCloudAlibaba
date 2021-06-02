@@ -1,23 +1,18 @@
 package com;
 
-import com.netflix.client.config.DefaultClientConfigImpl;
-import com.netflix.client.config.IClientConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.cloud.client.loadbalancer.LoadBalancedRetryFactory;
-import org.springframework.cloud.netflix.ribbon.RibbonLoadBalancedRetryFactory;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 
 /**
  * @author : penghong
  * @date : 2021-05-28 16:29
  */
-@SpringBootApplication(scanBasePackages={"com.netflix.client.config.IClientConfig"})
+@SpringBootApplication(scanBasePackages={"com.stualibaba"})
 @EnableDiscoveryClient
 @EnableFeignClients
 public class OrderApplication {

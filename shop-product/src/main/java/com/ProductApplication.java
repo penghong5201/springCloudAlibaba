@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
  * @author : penghong
  * @date : 2021-05-28 15:16
  */
-@SpringBootApplication(scanBasePackages={"com.netflix.client.config.IClientConfig"})
+@SpringBootApplication(scanBasePackages={"com.stualibaba"})
 @EnableDiscoveryClient
 public class ProductApplication {
     public static void main(String[] args) {
